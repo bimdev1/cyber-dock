@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-02-10
+
 ### Added
 
-- Comprehensive project research and component selection.
-- Premium specification v2 with internal PSU, 2.5GbE, and OLED display.
-- Design documentation in `docs/` directory.
-- Initial repository scaffolding (License, gitignore).
+- **Hardware Design Prep (v1.0):** Complete set of architectural documentation (`01_vision.md` through `08_hardware_validation.md`).
+- **Power Architecture:** Defined 5V/3.3V buck cascade (TPS54560, TPS54332) and specific LDOs for peripheral rails (1.1V, 2.5V).
+- **Security Features:** Implemented CM5-controlled Force Power Off circuit via TI TPS2595 eFuse.
+- **Interfaces:** Finalized 20-pin FFC pinout with ground interleaving and CM5 GPIO mapping.
+- **Validation:** Established decoupling strategy, test point map, and structured bring-up procedure.
+- **Research:** Comprehensive project feasibility, competitive analysis, and premium component selection.
+- **Scaffolding:** Initial repository setup with LICENSE, .gitignore, and README.
