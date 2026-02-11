@@ -15,7 +15,19 @@
 | **DSI (Disp 1)** | - | N/A | - | Unused. |
 | **USB 2.0** | 105, 107 | VL817 (Hub) | `USB_D_P/N` | Hub uplink. |
 
-## 2. Low-Speed IO & Control
+| **USB 2.0** | 105, 107 | VL817 (Hub) | `USB_D_P/N` | Hub uplink. |
+
+## 2. Board-Level High-Speed Interconnects (Non-CM5)
+
+| Source | Destination | Signal Type | Net Name | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **USB-C Input** | PI3USB30532 | USB 3.0 / DP | `USBC_TX/RX_P/N` | Main Input from Laptop. |
+| **PI3USB30532** | VL817 (Upstream) | USB 3.0 | `HUB_UP_TX/RX_P/N` | Switched Data Path. |
+| **PI3USB30532** | PS8625 (Input) | DisplayPort | `DP_ML0/1_P/N` | Switched Video Path. |
+| **VL817 (Port 1)** | RTL8156B | USB 3.0 | `ETH_USB_TX/RX` | Laptop Ethernet. |
+| **ASM2806** | M.2 Slot | PCIe Gen 3 x4 | `NVME_TX/RX_P/N` | Storage Lane (x4 physical). |
+
+## 3. Low-Speed IO & Control
 
 | GPIO | Function | Destination | Pull | Notes |
 | :--- | :--- | :--- | :--- | :--- |
@@ -28,14 +40,14 @@
 | **GPIO 42** | `ETH_RST` | RTL8125BG | Down | Core: PCIe Ethernet Reset. |
 | **GPIO 44** | `SWITCH_RST` | ASM2806 | Down | Core: PCIe Switch Reset. |
 
-## 3. Power Management Signals (Core)
+## 4. Power Management Signals (Core)
 
 | Signal | Source | Destination | Setup | Notes |
 | :--- | :--- | :--- | :--- | :--- |
 | `GLOBAL_EN` | CM5 (PMIC_EN) | 3V3/1V8 Regulators | - | Main enable chain. |
 | `PG_3V3` | 3V3 Buck | CM5 (GLOBAL_RESET) | - | Hold CM5 in reset until power is stable. |
 
-## 4. Front Panel Interface (Daughterboard Connector)
+## 5. Front Panel Interface (Daughterboard Connector)
 
 > **Connection:** 20-pin FFC (Flat Flex Cable).
 > **Signals:** I2C, UART, Power Control, Status LEDs.

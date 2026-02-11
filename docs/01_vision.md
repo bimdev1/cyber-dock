@@ -17,8 +17,6 @@ Modern docks are passive. They expand ports but offer no intelligence. If your l
 
 ## Target Audience / Persona
 
-## Competitive Edge
-
 - Works from home or travels frequently.
 - Manages complex local environments (Kubernetes, heavy compilations).
 - Needs enterprise-grade reliability (ECC memory, reliable power).

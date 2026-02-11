@@ -15,12 +15,12 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 | **NVMe SSD** | 8.0 W | Peak write (Gen 3 x4 drive, Gen 2 speed) |
 | **USB Peripherals** | 10.0 W | 2x USB-A (5V/1.0A) - No SD/Audio |
 | **Fan & Logic** | 5.0 W | Fan, OLED, ICs |
-| **regulator Losses** | 18.0 W | ~12% loss on 5V/20V rails + Linear LDO heat |
-| **TOTAL LOAD** | **~156 W** | **Safe margin within 200W PSU.** |
+| **regulator Losses** | 5.0 W | ~90% efficient Buck Converters (No LDO heat) |
+| **TOTAL LOAD** | **~143 W** | **Safe margin within 200W PSU.** |
 
 ## 2. Thermal Design Strategy
 
-- **Total Heat Dissipation:** ~35W (Internal logic + Regulator Loss) + PSU heat.
+- **Total Heat Dissipation:** ~25W (Internal logic) + PSU heat.
 - **Enclosure:** CNC Aluminum 6061-T6.
   - *Dimensions:* 180 × 100 × 38 mm.
   - **Surface Analysis:** The aluminum shell acts as a massive thermal reservoir.
@@ -48,7 +48,7 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 
 - M.2 NVMe (PCIe Gen 3 x4 physical, Gen 2 x1 electrical via ASM2806)
 
-### 4. Critical ICs & Active Components
+## 4. Critical ICs & Active Components
 
 | Component | Category | Role | Package |
 | :--- | :--- | :--- | :--- |
@@ -58,7 +58,8 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 | **TI TPS54560** | Power | 5V 5A Step-Down Converter. | SO-8 PowerPad |
 | **TI TPS54332** | Power | 3.3V 3.5A Step-Down Converter. | SO-8 PowerPad |
 | **TLV70025** | Power | 2.5V LDO (for ASM2806). | SOT-23 |
-| **TPS74801** | Power | 1.05V/1.1V LDO (for Core Logic). | VQFN-20 |
+| **TLV62569** | Power | 1.1V 2A Buck Converter (High Efficiency). | SOT-563 |
+| **TPS22965** | Power | 3.3V Load Switch (PCIe Power Control). | WSON-8 |
 | **CM5** | Compute | Main System Controller. | B2B Connectors |
 | **VL817-Q7** | USB Hub | USB 3.1 Gen 1 Hub. | QFN-76 |
 | **ASM2806** | PCIe | PCIe Gen 3 Switch (Packet Switch). | QFN-136 |

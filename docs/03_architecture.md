@@ -28,10 +28,8 @@ graph LR
         HUB -->|Port 1| ETH_LAPTOP[RTL8156B 2.5GbE]
         HUB -->|Port 2| USB_A_1[Front USB-A]
         HUB -->|Port 3| USB_A_2[Front USB-A]
-        HUB -->|Port 4| CM5_OTG[CM5 USB 2.0 Port]
+        HUB -->|Port 4| CM5_OTG[CM5 USB 2.0 (Gadget Mode)]
     end
-    
-    CM5_OTG -.->|Gadget Mode| LAPTOP
 ```
 
 * **Key Component:** **Pericom PI3USB30532**.
@@ -39,7 +37,7 @@ graph LR
 * **Key Component:** **Via Labs VL817**.
   * **Function:** 4-Port USB 3.1 Gen 1 Hub.
   * **OTG Wiring:** Port 4 is hardwired to the CM5's USB 2.0 OTG pins.
-  * **Magic:** This allows the CM5 to run `dwc2` and appear to the Laptop as a Keyboard/Mouse (HID) or a USB Drive (Mass Storage) for ISO mounting.
+  * **Data Path:** `Laptop` <-> `VL817 Upstream` <-> `VL817 Port 4` <-> `CM5`. The CM5 enumerates as a USB device (HID/Mass Storage) to the laptop through this hub chain.
 
 ### B. PCIe Interconnect (The "Server")
 
