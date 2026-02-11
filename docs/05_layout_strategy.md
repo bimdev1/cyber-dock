@@ -4,6 +4,8 @@
 
 ## 1. The Strategy: "Core + Interface" Topology
 
+### A. Core Component Placement (Top Side)
+
 We will split the design into **Low-Risk Modularity** and **High-Performance Integration**.
 
 ### Why NOT full physical modularity?
@@ -22,8 +24,6 @@ We will organize the **Mainboard** into three distinct isolation zones. This all
 
 ### Zone A: The High-Speed Core (The "Brains")
 
-*Status: Fixed & Protected*
-
 - **Components:** Raspberry Pi CM5, ASM2806 (PCIe Switch), VL817 (USB Hub), NVMe Slot.
 - **Location:** Center of Board.
 - **Routing Strategy:** Shortest possible traces. Controlled impedance (85Ω/90Ω/100Ω).
@@ -31,7 +31,7 @@ We will organize the **Mainboard** into three distinct isolation zones. This all
 
 ### Zone B: The Power Stage (The "Engine")
 
-*Status: Modular Block*
+**Status:** Modular Block
 
 - **Components:** USB-C Input, TPS65987D (PD Controller), 20V/5V/3V3 DC-DC Buck Converters.
 - **Location:** Rear/Side edge.
@@ -40,7 +40,7 @@ We will organize the **Mainboard** into three distinct isolation zones. This all
 
 ### Zone C: The User Interface (The "Face")
 
-*Status: Physically Modular (Daughterboard)*
+**Status:** Physically Modular (Daughterboard)
 
 - **Components:** OLED Display, Status LEDs, Power Button, Force-Off Relay Trigger.
 - **Strategy:** **Move these to a separate, passive PCB.**
@@ -53,7 +53,7 @@ We will organize the **Mainboard** into three distinct isolation zones. This all
 
 We will use **Hierarchical Sheets** in KiCad. This is the software equivalent of modular code.
 
-```
+```kicad_project_structure
 Root.kicad_sch
 ├── Power_Delivery.kicad_sch       (TPS65987D + Regulators)
 ├── CM5_Integration.kicad_sch      (Connectors + Fan Control)
@@ -72,6 +72,10 @@ If we build the "SD Card Reader" later, we just add a `Storage_Expansion.kicad_s
 3. **Layout:** Route the High-Speed Core and Power Planes **concurrently**. The power distribution (L3) is the reference for the signals (L1/L4). Using "Power Last" is a recipe for broken return paths.
 
 ## 5. Summary of "Modular" Decisions
+
+```text
+[B2B_PWR] <--- 10mm (Max) ---> [SYS_5V_REG] <--- 30mm ---> [DC_IN]
+```
 
 | Feature | Modularity Approach |
 | :--- | :--- |

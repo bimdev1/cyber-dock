@@ -24,7 +24,7 @@ Modern docks are passive. They expand ports but offer no intelligence. If your l
 - Needs enterprise-grade reliability (ECC memory, reliable power).
 - Hates clutter. Wants one cable to rule them all.
 
-## User Journey: "The Monday Morning Crash"
+## User Journey: "The Portable Office"
 
 1. **09:00 AM:** Tim is in Tokyo. His workstation laptop in New York freezes during a Windows update.
 2. **09:05 AM:** Tim logs into his **Cyber-Dock** via Tailscale on his iPad.

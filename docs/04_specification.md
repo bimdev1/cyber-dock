@@ -23,7 +23,7 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 - **Total Heat Dissipation:** ~25W (Internal logic) + PSU heat.
 - **Enclosure:** CNC Aluminum 6061-T6.
   - *Dimensions:* 180 × 100 × 38 mm.
-  - *Surface Analysis:* The aluminum shell acts as a massive thermal reservoir.
+  - *Surface Analysis:** The aluminum shell acts as a massive thermal reservoir.
 - **Active Cooling:** **Noctua NF-A4x10 5V PWM**.
   - *Placement:* Internal, blowing across the Main logic PCB and CM5 heatsink.
   - *Airflow Path:* Intake vents (bottom/side) → PCB/CPU → Exhaust vents (rear).
@@ -46,20 +46,9 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 
 ### Storage
 
-- **M.### 2. Power Budget (Estimated)
+- M.2 NVMe (PCIe Gen 3 x4)
 
-> **Input:** 20V DC (Internal PSU or External 100W+ Brick).
-> **Total Budget:** ~145W (100W Laptop + 45W System).
-
-| Rail | Source | Max Load | Primary Consumers |
-| :--- | :--- | :--- | :--- |
-| **20V** | AC/DC | 5A (100W) | **Laptop PD** (Passthrough via TPS2595). |
-| **5.0V** | **Buck (TPS54560)** | 5A (25W) | CM5, USB Peripherals, 3V3 Buck Input. |
-| **3.3V** | **Buck (TPS54332)** | 3.5A (11.5W) | PCIe Switch, NVMe, IC IO, MCU. |
-| **2.5V** | LDO (from 3V3) | 200mA | **ASM2806** Analog Supply. |
-| **1.1V** | LDO (from 3V3) | 1.5A | **VL817** Core (1.1V), **ASM2806** Core (1.05V). |
-
-### 3. Critical ICs & Active Components
+### 4. Critical ICs & Active Components
 
 | Component | Category | Role | Package |
 | :--- | :--- | :--- | :--- |

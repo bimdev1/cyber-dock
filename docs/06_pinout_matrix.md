@@ -24,7 +24,7 @@
 | **GPIO 4** | FAN_PWM | Noctua Fan | - | System Fan Control. |
 | **GPIO 5** | FAN_TACH | Noctua Fan | Up | System Fan RPM. |
 | **GPIO 6** | `RELAY_EN` | TPS2595 (EN) | Down | Core: Force Power Off Trigger. |
-| **GPIO 26** | `RELAY_FLT_N`| TPS2595 (FLT)| Up | Core: Power Switch Fault Input. |
+| **GPIO 26** | `RELAY_FLT_N` | TPS2595 (FLT) | Up | Core: Power Switch Fault Input. |
 | **GPIO 42** | `ETH_RST` | RTL8125BG | Down | Core: PCIe Ethernet Reset. |
 | **GPIO 44** | `SWITCH_RST` | ASM2806 | Down | Core: PCIe Switch Reset. |
 

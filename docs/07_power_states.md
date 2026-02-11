@@ -3,7 +3,7 @@
 > **Objective:** Ensure safe, monotonic startup of the Cyber-Dock, protecting voltage-sensitive rails on the CM5 and high-speed ICs.
 > **Critical:** CM5 must be held in reset until all rails (5V, 3V3) are stable.
 
-### 1. Power Tree Topology
+## 1. Power Tree Topology
 
 ```mermaid
 graph TD
@@ -17,7 +17,7 @@ graph TD
     SYS_3V3 -->|LDO| SYS_1V1[1.1V Core (VL817/Switch)]
 ```
 
-### 2. Startup Sequence (Hardware Enforced)
+## 2. Startup Sequence (Hardware Enforced)
 
 > **Goal:** Ensure stable rails before the CM5 attempts to boot or train PCIe.
 
@@ -29,7 +29,7 @@ graph TD
     * *Mechanism:* PG is Open-Drain with Pull-Up. Held Low until Vout > 94%.
 6. **T+30ms:** CM5 Internal PMIC starts; ROM Boots.
 
-### 3. Voltage Monitoring & Reset
+## 3. Voltage Monitoring & Reset
 
 | Rail | Monitor Source | Action on Fault |
 | :--- | :--- | :--- |
@@ -38,7 +38,7 @@ graph TD
 | **3.3V** | **TPS54332 (PG)** | Pull `GLOBAL_RESET` Low -> Hard Reset CM5. |
 | **LDOs** | None (Passive) | Reliance on 3V3 input stability. |
 
-### 4. Laptop Power State (VBUS)
+## 4. Laptop Power State (VBUS)
 
 * **Default:** OFF (Safe State).
 * **Enable Condition:** CM5 Booted + Software Check Pass.
