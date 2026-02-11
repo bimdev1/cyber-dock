@@ -13,10 +13,10 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 | **Laptop PD Output** | 100.0 W | Priority load (TPS65987D) |
 | **Raspberry Pi CM5** | 15.0 W | Max CPU + PCIe load |
 | **NVMe SSD** | 8.0 W | Peak write (Gen 3 x4 drive) |
-| **USB Peripherals** | 15.0 W | 2x USB-A (5V/1.5A) + SD |
+| **USB Peripherals** | 10.0 W | 2x USB-A (5V/1.0A) - No SD/Audio |
 | **Fan & Logic** | 5.0 W | Fan, OLED, ICs |
 | **Efficiency Loss** | 15.0 W | DC-DC conversion heat |
-| **TOTAL LOAD** | **~158 W** | **Safe margin within 200W PSU.** |
+| **TOTAL LOAD** | **~153 W** | **Safe margin within 200W PSU.** |
 
 ## 2. Thermal Design Strategy
 
@@ -48,14 +48,13 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 
 - **M.2 Slot:** M-Key 2280.
 - **Lanes:** PCIe Gen 2 x1 (via ASM2806 switch).
-- **Bandwidth:** ~450 MB/s real-world. (Limited by CM5 uplink, not the drive).
+- **Bandwidth:** Shared ~500 MB/s total throughput. (Contended with Management LAN).
 
 ### Front Panel Interface
 
 - **OLED:** SSD1306 (I2C) - 4-pin header [VCC, GND, SCL, SDA].
-- **MicroSD:** Push-push connector (GL3224).
-- **Audio:** 3.5mm TRRS Jack (PCM2704).
 - **USB:** 1x USB-A 3.0, 1x USB-C (Data only).
+- *(Audio and SD Card Reader removed to reduce complexity v1.0)*
 
 ## 4. Bill of Materials (Critical ICs)
 
@@ -64,6 +63,7 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 | PD Controller | TPS65987D | Texas Instruments | VQFN-56 |
 | USB Hub | VL817-Q7 | VIA Labs | QFN-76 |
 | PCIe Switch | ASM2806 | ASMedia | QFN-136 |
+| DP-to-HDMI | PS8625 | Parade | QFN-48 |
 | Video Bridge | TC358743XBG | Toshiba | VFBGA-64 |
 | Crossbar | PI3USB30532 | Diodes Inc | TQFN-40 |
 | HDMI Splitter | LT86102UXE | Lontium | QFN-76 |

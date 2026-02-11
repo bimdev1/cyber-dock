@@ -28,25 +28,24 @@ A USB-C docking station can serve as an autonomous **Edge Server** and **Out-of-
 
 - **Scenario:** Sensitive workstation cannot touch the corporate LAN directly.
 - **Solution:** Dock connects to corporate LAN (via CM5). Laptop connects ONLY to the Dock via USB-C.
-- **Benefit:** CM5 acts as a sophisticated hardware firewall and proxy, inspecting all traffic before it hits the laptop.
+- **Benefit:** CM5 *can* act as a hardware firewall/proxy (Rich Software Dependency: Requires transparent proxy & packet inspection stack).
 
 ## Feasibility Analysis
 
 ### Technical Feasibility: HIGH
 
-- **Compute:** Raspberry Pi CM5 is well-supported, widely available, and powerful enough (Quad A76) for these tasks.
-- **Video Capture:** TC358743 (HDMI-to-CSI) is the industry standard for low-latency capture on Pi.
-- **Power:** USB-C PD controllers (TPS65987D) can easily handle 100W+ negotiation and role swapping.
-- **Networking:** PCIe-based Ethernet (RTL8125) on CM5 removes the USB bottleneck seen in older Pi models.
+- **Compute:** Raspberry Pi CM5 is well-supported.
+- **Video Capture:** TC358743 (HDMI-to-CSI).
+- **Power:** USB-C PD controllers (TPS65987D).
+- **Networking:** PCIe-based Ethernet (RTL8125).
 
 ### Competitive Landscape
 
 | Device | Type | Strengths | Weaknesses |
 | :--- | :--- | :--- | :--- |
-| **CalDigit TS4** | Thunderbolt Dock | 18 ports, 98W PD, 2.5GbE | "Dumb" device. No OS, no remote access. |
-| **PiKVM v3/v4** | KVM over IP | Great software, reliable | Not a dock. Messy cabling. No PD charging. |
-| **BliKVM** | PCIe KVM | Cheap, innovative | Internal PC card only. Not a dock. |
-| **Cyber-Dock** | **Hybrid** | **Autonomous OS + 100W PD + KVM** | Complex R&D. High BOM cost. |
+| **CalDigit TS4** | Thunderbolt Dock | 18 ports, 98W PD | "Dumb" device. No OS. |
+| **PiKVM v3/v4** | KVM over IP | Great software | Not a dock. Messy. |
+| **Cyber-Dock** | **USB-C Hybrid** | **Autonomous OS + 100W PD** | Complex R&D. High Cost. |
 
 ## Key Risks & Mitigations
 

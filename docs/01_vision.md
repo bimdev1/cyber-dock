@@ -11,13 +11,13 @@ Modern docks are passive. They expand ports but offer no intelligence. If your l
 
 **Cyber-Dock** fuses three devices into one premium chassis:
 
-1. **High-End Thunderbolt/USB-C Dock:** 100W charging, 4K video, fast peripheral access.
+1. **High-End USB-C Dock:** 100W charging, 4K video, fast peripheral access.
 2. **IP-KVM (PiKVM):** BIOS-level remote control, screen capture, and keyboard emulation.
 3. **Edge Server (NAS):** An always-on Linux server for Docker, VPN, and storage.
 
 ## Target Audience / Persona
 
-**" The Remote Systems Architect"**
+## Competitive Edge
 
 - Works from home or travels frequently.
 - Manages complex local environments (Kubernetes, heavy compilations).
@@ -50,9 +50,9 @@ Modern docks are passive. They expand ports but offer no intelligence. If your l
   - [x] NVMe Storage (PCIe Gen 2 via Switch).
 - **Stretch Goals (v1.5):**
   - [ ] OLED Status Display (IP, Power Output, Temps).
-  - [ ] Front-panel SD Card Reader.
   - [ ] Hardware Hardware Watchdog.
 - **Future (v2.0):**
+  - [ ] Front-panel SD Card Reader.
   - [ ] USB4 / Thunderbolt 4 (40 Gbps).
   - [ ] POE++ Input (Power the whole dock from a switch).
   - [ ] Dual HDMI Inputs.

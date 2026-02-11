@@ -27,10 +27,9 @@ The system is built around three main data buses connecting the Laptop and the C
   - *Upstream:* Laptop.
   - *Downstream Ports:*
     1. **RTL8156B** (2.5GbE for Laptop).
-    2. **GL3224** (SD Card Reader).
-    3. **USB-A Front** (Peripheral).
-    4. **USB-A Rear** (Peripheral).
-  - *Note:* Audio DAC (PCM2704) moved to CM5 USB Host to save a port.
+    2. **USB-A Front** (Peripheral).
+    3. **USB-A Rear** (Peripheral).
+    4. **Unused** (Reserved for future).
 
 ### C. PCIe Interconnect (ASM2806)
 
@@ -40,6 +39,14 @@ The system is built around three main data buses connecting the Laptop and the C
     1. **NVMe SSD** (Slot M.2 M-key).
     2. **RTL8125BG** (2.5GbE Management NIC).
   - *Why:* CM5 only has 1 PCIe lane. We need simultaneous fast storage and fast networking.
+
+### D. System Control & GPIO
+
+- **Force Power Off Circuit:**
+  - **Function:** Physically cuts VBUS power to the laptop to force a reboot.
+  - **Mechanism:** High-side PCie-controlled Load Switch or MOSFET on the 20V rail.
+  - **Control:** CM5 GPIO (Active High) → Gate Driver → FET.
+  - **Use Case:** Recovering from frozen OS states where software reboot fails.
 
 ### D. KVM Video Path (The "Loopback")
 
