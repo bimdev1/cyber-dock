@@ -12,6 +12,7 @@
 * **Input (20V):** 2x 10µF (50V, X7R, 1210) + 1x 0.1µF (0402) at TPS54560 input.
 * **Output (5V):** 2x 22µF (10V, X7R, 1206) + 1x 100µF (Polymer/Tantalum) for bulk stability.
 * **Output (3.3V):** 2x 22µF (6.3V, X7R, 0805).
+* **TPS2595 (VBUS):** Calculate **dV/dt capacitor** to limit inrush < 5A based on estimated Laptop input cap (assume 50µF).
 
 ### B. High-Speed Digital ICs (VL817, ASM2806, RTL8125BG, PS8625)
 
@@ -41,8 +42,8 @@
 * `TP_20V_IN` (Main Input)
 * `TP_5V_SYS` (System Primary)
 * `TP_3V3_SYS` (IO/PCIe)
-* `TP_1V8_CORE` (If external LDO used)
-* `TP_1V05_CORE` (If external LDO used)
+* `TP_2V5_ANA` (ASM2806 Analog)
+* `TP_1V1_CORE` (VL817 / Switch Core)
 * `TP_GND_REF` (Near power staging area)
 
 ### B. Control Signals (Logic)

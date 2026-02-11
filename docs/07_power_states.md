@@ -13,7 +13,8 @@ graph TD
     
     SYS_5V -->|Internal PMIC| CM5_CORE[CM5 Core Rails]
     SYS_5V -->|TPS54332 Buck| SYS_3V3[3.3V IO / PCIe]
-    SYS_3V3 -->|LDOs| SYS_1V8[1.8V / 1.05V Core]
+    SYS_3V3 -->|LDO| SYS_2V5[2.5V Analog (ASM2806)]
+    SYS_3V3 -->|LDO| SYS_1V1[1.1V Core (VL817/Switch)]
 ```
 
 ### 2. Startup Sequence (Hardware Enforced)
@@ -23,9 +24,10 @@ graph TD
 1. **T+0ms (Input):** 20V Applied -> **TPS54560** Soft Starts `5V_SYS`.
 2. **T+10ms:** `5V_SYS` reaches stable region -> Enables **TPS54332** (3V3 Buck).
 3. **T+20ms:** `3V3_SYS` reaches stable region.
-4. **T+25ms:** **TPS54332 Power Good (PG)** signal releases `GLOBAL_RESET`.
+4. **T+22ms:** LDOs (2.5V, 1.1V) stabilize (fast start).
+5. **T+25ms:** **TPS54332 Power Good (PG)** signal releases `GLOBAL_RESET`.
     * *Mechanism:* PG is Open-Drain with Pull-Up. Held Low until Vout > 94%.
-5. **T+30ms:** CM5 Internal PMIC starts; ROM Boots.
+6. **T+30ms:** CM5 Internal PMIC starts; ROM Boots.
 
 ### 3. Voltage Monitoring & Reset
 
@@ -34,12 +36,14 @@ graph TD
 | **20V** | TPS2595 (`FLT_N`) | Interrupt CM5 (GPIO 26); Status LED. |
 | **5.0V** | TPS54560 (Internal) | Cycle Shutdown / Hiccup Mode. |
 | **3.3V** | **TPS54332 (PG)** | Pull `GLOBAL_RESET` Low -> Hard Reset CM5. |
+| **LDOs** | None (Passive) | Reliance on 3V3 input stability. |
 
 ### 4. Laptop Power State (VBUS)
 
 * **Default:** OFF (Safe State).
 * **Enable Condition:** CM5 Booted + Software Check Pass.
 * **Action:** GPIO 6 High -> **TPS2595** Enable.
+* **Soft-Start:** dV/dt cap set for < 5A inrush current.
 * **Reasoning:** Security Air Gap. Laptop powers on only when "Dock" is verified safe.
 
 ## 3. Power-Down Sequence (Safe Shutdown)

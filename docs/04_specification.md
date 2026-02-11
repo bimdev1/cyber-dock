@@ -56,7 +56,8 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 | **20V** | AC/DC | 5A (100W) | **Laptop PD** (Passthrough via TPS2595). |
 | **5.0V** | **Buck (TPS54560)** | 5A (25W) | CM5, USB Peripherals, 3V3 Buck Input. |
 | **3.3V** | **Buck (TPS54332)** | 3.5A (11.5W) | PCIe Switch, NVMe, IC IO, MCU. |
-| **1.X** | LDOs | 2A (2W) | Ethernet Core, HDMI Bridge Core. |
+| **2.5V** | LDO (from 3V3) | 200mA | **ASM2806** Analog Supply. |
+| **1.1V** | LDO (from 3V3) | 1.5A | **VL817** Core (1.1V), **ASM2806** Core (1.05V). |
 
 ### 3. Critical ICs & Active Components
 
@@ -67,6 +68,8 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 | **TI TPS2595** | Power | 20V eFuse / Verification / Safety. | QFN-10 |
 | **TI TPS54560** | Power | 5V 5A Step-Down Converter. | SO-8 PowerPad |
 | **TI TPS54332** | Power | 3.3V 3.5A Step-Down Converter. | SO-8 PowerPad |
+| **TLV70025** | Power | 2.5V LDO (for ASM2806). | SOT-23 |
+| **TPS74801** | Power | 1.05V/1.1V LDO (for Core Logic). | VQFN-20 |
 | **CM5** | Compute | Main System Controller. | B2B Connectors |
 | **VL817-Q7** | USB Hub | USB 3.1 Gen 1 Hub. | QFN-76 |
 | **ASM2806** | PCIe | PCIe Gen 3 Switch (Packet Switch). | QFN-136 |
