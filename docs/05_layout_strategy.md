@@ -73,6 +73,8 @@ If we build the "SD Card Reader" later, we just add a `Storage_Expansion.kicad_s
 
 ## 5. Summary of "Modular" Decisions
 
+**Signal Path & Spacing Strategy:**
+
 ```text
 [B2B_PWR] <--- 10mm (Max) ---> [SYS_5V_REG] <--- 30mm ---> [DC_IN]
 ```

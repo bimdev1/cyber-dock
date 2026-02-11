@@ -35,18 +35,17 @@ A USB-C docking station can serve as an autonomous **Edge Server** and **Out-of-
 ### Technical Feasibility: HIGH
 
 - **Compute:** Raspberry Pi CM5 is well-supported.
-- **Compute:** Raspberry Pi CM5 is well-supported.
 - **Video Capture:** TC358743 (HDMI-to-CSI).
 - **Power:** USB-C PD controllers (TPS65987D).
 - **Networking:** PCIe-based Ethernet (RTL8125).
 
 ### Competitive Landscape
 
-| Device | Feature | Standard Dock | Cyber-Dock | Benefit |
-| :--- | :--- | :--- | :--- | :--- |
-| **CalDigit TS4** | Thunderbolt Dock | 18 ports, 98W PD | "Dumb" device. | No OS. |
-| **PiKVM v3/v4** | KVM over IP | Great software | Not a dock. | Messy. |
-| **Cyber-Dock** | **USB-C Hybrid** | **Autonomous OS** | **100W PD** | Professional tool. |
+| Device | Type | Strengths | Weaknesses |
+| :--- | :--- | :--- | :--- |
+| **CalDigit TS4** | Thunderbolt Dock | 18 ports, 98W PD | "Dumb" device (No OS). |
+| **PiKVM v3/v4** | KVM over IP | Great software | Not a dock (Messy dongle). |
+| **Cyber-Dock** | **Hybrid** | **Autonomous OS + 100W PD** | Premium pricing. |
 
 ## Key Risks & Mitigations
 

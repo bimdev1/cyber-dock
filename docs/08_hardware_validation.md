@@ -87,13 +87,15 @@
 
 ### Phase 4: High-Speed Peripheral Validation
 
-1. **PCIe Enumeration:** `lspci -nn`
+1. **PCIe Link Training:** `dmesg | grep -i pcie`
+    * *Expect:* "link up, Gen 2 (5.0 GT/s)". (Check this BEFORE `lspci` if devices are missing).
+2. **PCIe Enumeration:** `lspci -nn`
     * *Expect:* ASM2806 Switch -> NVMe Controller + RTL8125BG.
-2. **USB Hub:** `lsusb -t`
+3. **USB Hub:** `lsusb -t`
     * *Expect:* VL817 Hub hierarchy.
-3. **Video Capture:** `v4l2-ctl --list-devices`
+4. **Video Capture:** `v4l2-ctl --list-devices`
     * *Expect:* TC358743 (Toshiba Bridge).
-4. **Network:** `ip link show`
+5. **Network:** `ip link show`
     * *Expect:* `eth0` (CM5 Internal) + `eth1` (RTL8125BG).
 
 ### Phase 5: Power Delivery & Loopback

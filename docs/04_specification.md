@@ -12,18 +12,18 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 | :--- | :--- | :--- |
 | **Laptop PD Output** | 100.0 W | Priority load (TPS65987D) |
 | **Raspberry Pi CM5** | 15.0 W | Max CPU + PCIe load |
-| **NVMe SSD** | 8.0 W | Peak write (Gen 3 x4 drive) |
+| **NVMe SSD** | 8.0 W | Peak write (Gen 3 x4 drive, Gen 2 speed) |
 | **USB Peripherals** | 10.0 W | 2x USB-A (5V/1.0A) - No SD/Audio |
 | **Fan & Logic** | 5.0 W | Fan, OLED, ICs |
-| **Efficiency Loss** | 15.0 W | DC-DC conversion heat |
-| **TOTAL LOAD** | **~153 W** | **Safe margin within 200W PSU.** |
+| **regulator Losses** | 18.0 W | ~12% loss on 5V/20V rails + Linear LDO heat |
+| **TOTAL LOAD** | **~156 W** | **Safe margin within 200W PSU.** |
 
 ## 2. Thermal Design Strategy
 
-- **Total Heat Dissipation:** ~25W (Internal logic) + PSU heat.
+- **Total Heat Dissipation:** ~35W (Internal logic + Regulator Loss) + PSU heat.
 - **Enclosure:** CNC Aluminum 6061-T6.
   - *Dimensions:* 180 × 100 × 38 mm.
-  - *Surface Analysis:** The aluminum shell acts as a massive thermal reservoir.
+  - **Surface Analysis:** The aluminum shell acts as a massive thermal reservoir.
 - **Active Cooling:** **Noctua NF-A4x10 5V PWM**.
   - *Placement:* Internal, blowing across the Main logic PCB and CM5 heatsink.
   - *Airflow Path:* Intake vents (bottom/side) → PCB/CPU → Exhaust vents (rear).
@@ -46,7 +46,7 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 
 ### Storage
 
-- M.2 NVMe (PCIe Gen 3 x4)
+- M.2 NVMe (PCIe Gen 3 x4 physical, Gen 2 x1 electrical via ASM2806)
 
 ### 4. Critical ICs & Active Components
 

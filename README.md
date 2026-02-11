@@ -11,7 +11,7 @@ The Cyber-Dock is not just a hub; it's the ultimate tool for developers, sysadmi
 - **Remote KVM:** Low-latency 1080p capture (via CSI) for BIOS-level access over any network.
 - **Dual 2.5GbE:** Isolated management and data networks using Realtek PCIe and USB 3.0 controllers.
 - **Premium Build:** Internal Mean Well 200W PSU (IEC C14 inlet), CNC aluminum enclosure, and Noctua silent cooling.
-- **Storage & Peripherals:** M.2 NVMe NAS, 1.3" OLED status display, front microSD reader, and external WiFi antenna.
+- **Storage & Peripherals:** M.2 NVMe NAS and 1.3" OLED status display.
 
 ## Project Documentation
 

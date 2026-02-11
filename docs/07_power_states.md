@@ -45,8 +45,10 @@ graph TD
 * **Action:** GPIO 6 High -> **TPS2595** Enable.
 * **Soft-Start:** dV/dt cap set for < 5A inrush current.
 * **Reasoning:** Security Air Gap. Laptop powers on only when "Dock" is verified safe.
+* **Limitation (v1.0):** If CM5 fails to boot (SD corruption/Hardware fault), **Laptop receives NO power**.
+  * *Future Mitigation (v1.5):* Hardware watchdog timer to bypass CM5 and enable default 5V/3A Safe Mode if handshake times out.
 
-## 3. Power-Down Sequence (Safe Shutdown)
+## 5. Power-Down Sequence (Safe Shutdown)
 
 1. **Software Command:** User requests Shutdown (or UPS triggers it).
 2. **Payload Off:** CM5 cuts `3V3_PCIE` (Protect NVMe data).
@@ -54,7 +56,7 @@ graph TD
 4. **Halt:** CM5 shuts down OS.
 5. **Hard Cut:** Global power removal (External Switch or AC Cut).
 
-## 4. Protection Mechanisms
+## 6. Protection Mechanisms
 
 * **TPS2595 (Force Off):**
   * High-side eFuse on `20V_VBUS`.
