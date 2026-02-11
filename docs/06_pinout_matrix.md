@@ -19,8 +19,8 @@
 
 | GPIO | Function | Destination | Pull | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **GPIO 0** | ID_SD | - | - | Reserved for HAT ID. |
-| **GPIO 1** | ID_SC | - | - | Reserved for HAT ID. |
+| **GPIO 0** | `SPARE_A` | FFC Pin 18 | - | Reclaimed (No HAT usage). |
+| **GPIO 1** | `SPARE_B` | FFC Pin 19 | - | Reclaimed (No HAT usage). |
 | **GPIO 4** | FAN_PWM | Noctua Fan | - | System Fan Control. |
 | **GPIO 5** | FAN_TACH | Noctua Fan | Up | System Fan RPM. |
 | **GPIO 42** | `ETH_RST` | RTL8125BG | Down | Core: PCIe Ethernet Reset. |
@@ -38,16 +38,25 @@
 > **Connection:** 20-pin FFC (Flat Flex Cable).
 > **Signals:** I2C, UART, Power Control, Status LEDs.
 
-| Pin | Signal Name | CM5/Source | Function |
-| :--- | :--- | :--- | :--- |
-| 1 | `3V3_STBY` | 3V3 Reg | Always-on power for Power Button LED. |
-| 2 | `GND` | GND | - |
-| 3 | `PWR_BTN_N` | PMIC_WAKE | Power On/Off Request (Active Low). |
-| 4 | `RELAY_EN` | GPIO 6 | **Force Power Off** Trigger (Active High). |
-| 5 | `I2C1_SDA` | GPIO 2 | OLED Display Data. |
-| 6 | `I2C1_SCL` | GPIO 3 | OLED Display Clock. |
-| 7 | `UART0_TX` | GPIO 14 | Serial Console TX. |
-| 8 | `UART0_RX` | GPIO 15 | Serial Console RX. |
-| 9 | `LED_ACT` | ACT_LED | Activity LED. |
-| 10 | `LED_PWR` | PWR_LED | Power Status LED. |
-| ... | ... | ... | ... |
+| Pin | Signal Name | CM5/Source | Function | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | `3V3_STBY` | 3V3 Reg | Always-on power for Power Button LED. | |
+| 2 | `GND` | GND | Ground Reference. | Shielding. |
+| 3 | `PWR_BTN_N` | PMIC_WAKE | Power On/Off Request (Active Low). | |
+| 4 | `GND` | GND | Ground Reference. | Isolation. |
+| 5 | `RELAY_EN` | GPIO 6 | **Force Power Off** Trigger (Active High). | |
+| 6 | `RELAY_FLT_N` | TPS2595 (FLT) | **Relay Status/Fault** (Active Low). | Feedback to CM5. |
+| 7 | `GND` | GND | Ground Reference. | Isolation. |
+| 8 | `I2C1_SDA` | GPIO 2 | OLED Display Data. | |
+| 9 | `I2C1_SCL` | GPIO 3 | OLED Display Clock. | |
+| 10 | `GND` | GND | Ground Reference. | Isolation. |
+| 11 | `UART0_TX` | GPIO 14 | Serial Console TX. | |
+| 12 | `UART0_RX` | GPIO 15 | Serial Console RX. | |
+| 13 | `GND` | GND | Ground Reference. | Isolation. |
+| 14 | `LED_NVME` | ASM2806 (LED) | NVMe Activity LED. | Driven by Switch. |
+| 15 | `LED_PWR` | 3V3_PG | System Power Good LED. | Hardwired Indication. |
+| 16 | `ALERT_N` | CM5 (EXT_INT) | Thermal/PMIC Alert. | Interrupt from CM5. |
+| 17 | `GND` | GND | Ground Reference. | Isolation. |
+| 18 | `SPARE_A` | GPIO 0 | User Spare / Expansion. | |
+| 19 | `SPARE_B` | GPIO 1 | User Spare / Expansion. | |
+| 20 | `GND` | GND | Ground Reference. | Shielding. |

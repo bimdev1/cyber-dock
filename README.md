@@ -21,14 +21,18 @@ Detailed research and specifications are available in the [docs/](docs/) directo
 2. [Feasibility](docs/02_feasibility.md) - Initial exploration and risk assessment.
 3. [Architecture](docs/03_architecture.md) - Technical system design and signal paths.
 4. [Specification](docs/04_specification.md) - Hardware BOM, power budget, and thermal strategy.
+5. [Layout Strategy](docs/05_layout_strategy.md) - Modular core + daughterboard plan.
+6. [Pinout Matrix](docs/06_pinout_matrix.md) - CM5 and FFC interface pinouts.
+7. [Power States](docs/07_power_states.md) - Sequencing and regulator strategy.
 
 ## Hardware Status
 
-- [x] Phase 1: Conceptual Research
-- [x] Phase 2: Premium Component Selection
-- [ ] Phase 3: Schematic & PCB Design (KiCad)
-- [ ] Phase 4: Enclosure CAD & Thermal Simulation
-- [ ] Phase 5: Prototype Manufacturing
+- [x] Phase 1: Conceptual Research & Vision
+- [x] Phase 2: Technical Feasibility & Component selection
+- [/] Phase 3: Hardware Design Preparation (Pinout, Sequencing)
+- [ ] Phase 4: Schematic & PCB Design (KiCad)
+- [ ] Phase 5: Enclosure CAD & Thermal Simulation
+- [ ] Phase 6: Prototype Manufacturing
 
 ## License
 

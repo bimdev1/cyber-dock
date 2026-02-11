@@ -69,7 +69,7 @@ If we build the "SD Card Reader" later, we just add a `Storage_Expansion.kicad_s
 
 1. **Define Pinout Matrix (Updated):** Map GPIOs not just to "OLED" but to "Front Panel Header".
 2. **Schematic Entry:** Create the specific Hierarchical Sheets listed above.
-3. **Layout:** Route the High-Speed Core first, then build the Power and Interface zones around it.
+3. **Layout:** Route the High-Speed Core and Power Planes **concurrently**. The power distribution (L3) is the reference for the signals (L1/L4). Using "Power Last" is a recipe for broken return paths.
 
 ## 5. Summary of "Modular" Decisions
 
