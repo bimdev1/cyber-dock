@@ -23,6 +23,8 @@
 | **GPIO 1** | `SPARE_B` | FFC Pin 19 | - | Reclaimed (No HAT usage). |
 | **GPIO 4** | FAN_PWM | Noctua Fan | - | System Fan Control. |
 | **GPIO 5** | FAN_TACH | Noctua Fan | Up | System Fan RPM. |
+| **GPIO 6** | `RELAY_EN` | TPS2595 (EN) | Down | Core: Force Power Off Trigger. |
+| **GPIO 26** | `RELAY_FLT_N`| TPS2595 (FLT)| Up | Core: Power Switch Fault Input. |
 | **GPIO 42** | `ETH_RST` | RTL8125BG | Down | Core: PCIe Ethernet Reset. |
 | **GPIO 44** | `SWITCH_RST` | ASM2806 | Down | Core: PCIe Switch Reset. |
 
@@ -44,8 +46,8 @@
 | 2 | `GND` | GND | Ground Reference. | Shielding. |
 | 3 | `PWR_BTN_N` | PMIC_WAKE | Power On/Off Request (Active Low). | |
 | 4 | `GND` | GND | Ground Reference. | Isolation. |
-| 5 | `RELAY_EN` | GPIO 6 | **Force Power Off** Trigger (Active High). | |
-| 6 | `RELAY_FLT_N` | TPS2595 (FLT) | **Relay Status/Fault** (Active Low). | Feedback to CM5. |
+| 5 | `RELAY_EN` | GPIO 6 | **Force Power Off** Trigger (Active High). | Parallel Hardware Override. |
+| 6 | `RELAY_FLT_N` | GPIO 26 | **Relay Status/Fault** (Active Low). | Feedback to Front Panel LED. |
 | 7 | `GND` | GND | Ground Reference. | Isolation. |
 | 8 | `I2C1_SDA` | GPIO 2 | OLED Display Data. | |
 | 9 | `I2C1_SCL` | GPIO 3 | OLED Display Clock. | |

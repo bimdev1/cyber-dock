@@ -3,30 +3,44 @@
 > **Objective:** Ensure safe, monotonic startup of the Cyber-Dock, protecting voltage-sensitive rails on the CM5 and high-speed ICs.
 > **Critical:** CM5 must be held in reset until all rails (5V, 3V3) are stable.
 
-## 1. Voltage Regulator Topology
+### 1. Power Tree Topology
 
-- **Input:** 20V DC (from Internal Mean Well PSU).
-- **Primary Rails:**
-  1. **5V_SYS** (Buck, 5A): Power for USB Hub, CM5 Input, Peripherals.
-  2. **3V3_SYS** (Buck, 3A): Logic power for Switch, Hub, Interface.
-  3. **1V05 / 1V8** (LDOs): Local regulation for ASM2806 / VL817 (If not internal).
-- **Load Switches:**
-  1. **20V_VBUS_OUT** (TPS2595): Gated power to Laptop.
-  2. **3V3_PCIE** (Load Switch): Gated power to NVMe/NIC (Controlled by CM5).
+```mermaid
+graph TD
+    DC_IN[20V DC Input] -->|Fuse/Filter| VBUS_20V[20V Rail]
+    VBUS_20V -->|TPS2595 eFuse| LAPTOP[Laptop VBUS]
+    VBUS_20V -->|TPS54560 Buck| SYS_5V[5.0V System]
+    
+    SYS_5V -->|Internal PMIC| CM5_CORE[CM5 Core Rails]
+    SYS_5V -->|TPS54332 Buck| SYS_3V3[3.3V IO / PCIe]
+    SYS_3V3 -->|LDOs| SYS_1V8[1.8V / 1.05V Core]
+```
 
-## 2. Power-Up Sequence (Cold Boot)
+### 2. Startup Sequence (Hardware Enforced)
 
-This sequence is enforced by **Hardware (PG signals)** and **RC Delays**, not software.
+> **Goal:** Ensure stable rails before the CM5 attempts to boot or train PCIe.
 
-| Time (T) | Rail/Event | Description | Condition |
-| :--- | :--- | :--- | :--- |
-| **0ms** | `20V_IN` | PSU turns on. | Input stable. |
-| **+5ms** | `5V_SYS` | 20V->5V Buck starts. | 20V > UVLO. |
-| **+10ms** | `3V3_SYS` | 5V->3V3 Buck starts. | `5V_PG` + 5ms delay. |
-| **+20ms** | `VSYS_CM5` | CM5 5V Input stable. | `5V_SYS` stable. |
-| **+50ms** | `GLOBAL_RESET` | CM5 Reset De-asserted. | `3V3_PG` is High. |
-| **+2s** | `20V_VBUS` | Laptop Power Logic. | CM5 boots, negotiates PD. |
-| **+3s** | `3V3_PCIE` | Peripherals enabled. | CM5 Software enables payload. |
+1. **T+0ms (Input):** 20V Applied -> **TPS54560** Soft Starts `5V_SYS`.
+2. **T+10ms:** `5V_SYS` reaches stable region -> Enables **TPS54332** (3V3 Buck).
+3. **T+20ms:** `3V3_SYS` reaches stable region.
+4. **T+25ms:** **TPS54332 Power Good (PG)** signal releases `GLOBAL_RESET`.
+    * *Mechanism:* PG is Open-Drain with Pull-Up. Held Low until Vout > 94%.
+5. **T+30ms:** CM5 Internal PMIC starts; ROM Boots.
+
+### 3. Voltage Monitoring & Reset
+
+| Rail | Monitor Source | Action on Fault |
+| :--- | :--- | :--- |
+| **20V** | TPS2595 (`FLT_N`) | Interrupt CM5 (GPIO 26); Status LED. |
+| **5.0V** | TPS54560 (Internal) | Cycle Shutdown / Hiccup Mode. |
+| **3.3V** | **TPS54332 (PG)** | Pull `GLOBAL_RESET` Low -> Hard Reset CM5. |
+
+### 4. Laptop Power State (VBUS)
+
+* **Default:** OFF (Safe State).
+* **Enable Condition:** CM5 Booted + Software Check Pass.
+* **Action:** GPIO 6 High -> **TPS2595** Enable.
+* **Reasoning:** Security Air Gap. Laptop powers on only when "Dock" is verified safe.
 
 ## 3. Power-Down Sequence (Safe Shutdown)
 
@@ -38,9 +52,9 @@ This sequence is enforced by **Hardware (PG signals)** and **RC Delays**, not so
 
 ## 4. Protection Mechanisms
 
-- **TPS2595 (Force Off):**
-  - High-side eFuse on `20V_VBUS`.
-  - Configured Limit: **5.0A** (100W).
-  - reaction Time: < 2us (Short circuit).
-- **3V3 Monitor:**
-  - If `3V3_SYS` drops below 3.0V, `GLOBAL_RESET` is asserted immediately to prevent CM5 brownout corruption.
+* **TPS2595 (Force Off):**
+  * High-side eFuse on `20V_VBUS`.
+  * Configured Limit: **5.0A** (100W).
+  * reaction Time: < 2us (Short circuit).
+* **3V3 Monitor:**
+  * If `3V3_SYS` drops below 3.0V, `GLOBAL_RESET` is asserted immediately to prevent CM5 brownout corruption.

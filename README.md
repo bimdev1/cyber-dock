@@ -24,6 +24,7 @@ Detailed research and specifications are available in the [docs/](docs/) directo
 5. [Layout Strategy](docs/05_layout_strategy.md) - Modular core + daughterboard plan.
 6. [Pinout Matrix](docs/06_pinout_matrix.md) - CM5 and FFC interface pinouts.
 7. [Power States](docs/07_power_states.md) - Sequencing and regulator strategy.
+8. [Hardware Validation](docs/08_hardware_validation.md) - Decoupling, Test Points, and Bring-up.
 
 ## Hardware Status
 

@@ -46,24 +46,32 @@ The system is powered by an internal **Mean Well LOP-200-20** (200W).
 
 ### Storage
 
-- **M.2 Slot:** M-Key 2280.
-- **Lanes:** PCIe Gen 2 x1 (via ASM2806 switch).
-- **Bandwidth:** Shared ~500 MB/s total throughput. (Contended with Management LAN).
+- **M.### 2. Power Budget (Estimated)
 
-### Front Panel Interface
+> **Input:** 20V DC (Internal PSU or External 100W+ Brick).
+> **Total Budget:** ~145W (100W Laptop + 45W System).
 
-- **OLED:** SSD1306 (I2C) - 4-pin header [VCC, GND, SCL, SDA].
-- **USB:** 1x USB-A 3.0, 1x USB-C (Data only).
-- *(Audio and SD Card Reader removed to reduce complexity v1.0)*
-
-## 4. Bill of Materials (Critical ICs)
-
-| Function | Part Number | Manufacturer | Package |
+| Rail | Source | Max Load | Primary Consumers |
 | :--- | :--- | :--- | :--- |
-| PD Controller | TPS65987D | Texas Instruments | VQFN-56 |
-| USB Hub | VL817-Q7 | VIA Labs | QFN-76 |
-| PCIe Switch | ASM2806 | ASMedia | QFN-136 |
-| DP-to-HDMI | PS8625 | Parade | QFN-48 |
-| Video Bridge | TC358743XBG | Toshiba | VFBGA-64 |
-| Crossbar | PI3USB30532 | Diodes Inc | TQFN-40 |
-| HDMI Splitter | LT86102UXE | Lontium | QFN-76 |
+| **20V** | AC/DC | 5A (100W) | **Laptop PD** (Passthrough via TPS2595). |
+| **5.0V** | **Buck (TPS54560)** | 5A (25W) | CM5, USB Peripherals, 3V3 Buck Input. |
+| **3.3V** | **Buck (TPS54332)** | 3.5A (11.5W) | PCIe Switch, NVMe, IC IO, MCU. |
+| **1.X** | LDOs | 2A (2W) | Ethernet Core, HDMI Bridge Core. |
+
+### 3. Critical ICs & Active Components
+
+| Component | Category | Role | Package |
+| :--- | :--- | :--- | :--- |
+| **Mean Well LOP-200-20** | Power | Internal 200W PSU (20V/10A). | 4"x2" Open Frame |
+| **TI TPS65987D** | Power | USB-C PD Controller. | QFN-56 |
+| **TI TPS2595** | Power | 20V eFuse / Verification / Safety. | QFN-10 |
+| **TI TPS54560** | Power | 5V 5A Step-Down Converter. | SO-8 PowerPad |
+| **TI TPS54332** | Power | 3.3V 3.5A Step-Down Converter. | SO-8 PowerPad |
+| **CM5** | Compute | Main System Controller. | B2B Connectors |
+| **VL817-Q7** | USB Hub | USB 3.1 Gen 1 Hub. | QFN-76 |
+| **ASM2806** | PCIe | PCIe Gen 3 Switch (Packet Switch). | QFN-136 |
+| **RTL8125BG** | Network | 2.5GbE Controller (PCIe). | QFN-48 |
+| **PI3USB30532** | Mux | USB/DP Crossbar Switch. | TQFN-40 |
+| **LT86102UXE** | Splitter | HDMI 1.4 Splitter (1-in-2-out). | QFN-76 |
+| **PS8625** | Converter | DP to HDMI 1.4b Converter. | QFN-48 |
+| **TC358743** | Bridge | HDMI to CSI-2 Bridge. | BGA-64 |
