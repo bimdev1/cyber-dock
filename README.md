@@ -17,10 +17,10 @@ The Cyber-Dock is not just a hub; it's the ultimate tool for developers, sysadmi
 
 Detailed research and specifications are available in the [docs/](docs/) directory:
 
-1. [Exploration](docs/exploration.md) - Initial concept and feasibility.
-2. [Research](docs/research.md) - Technical architecture and IC selection.
-3. [Product Vision](docs/product_vision.md) - Competitive analysis and feature matrix.
-4. [Premium Component Spec](docs/premium_spec.md) - Finalized high-end hardware specification.
+1. [Vision](docs/01_vision.md) - Competitive analysis and product goals.
+2. [Feasibility](docs/02_feasibility.md) - Initial exploration and risk assessment.
+3. [Architecture](docs/03_architecture.md) - Technical system design and signal paths.
+4. [Specification](docs/04_specification.md) - Hardware BOM, power budget, and thermal strategy.
 
 ## Hardware Status
 
